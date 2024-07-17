@@ -30,7 +30,7 @@ The backend provides the following URLs:
 
 #### POST /files
 
-Upload one or more HTML Course files. At the moment there is no checking of the content. The files will be stored in the uploads directory at the server. If the upload was successfull an array with the information about the files will be returned (just the filename, which is prepended with an timestamp, so that you get no problem with uploading the same file multiple times).
+Upload one or more HTML Course files. At the moment there is no checking of the content. The files will be stored in the uploads directory at the server. If the upload was successful an array with the information about the files will be returned (just the filename, which is prepended with an timestamp, so that you get no problem with uploading the same file multiple times).
 
 #### GET /infos/:filename
 
