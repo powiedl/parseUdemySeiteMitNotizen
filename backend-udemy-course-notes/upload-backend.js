@@ -30,9 +30,7 @@ app.post("/files", upload.array("htmlfiles"), (req, res) => {
 
 app.get("/infos/:htmlfile", (req, res) => {
   const fullFilename = process.cwd() + "/uploads" + "/" + req.params.htmlfile;
-  console.log(`Processing '${fullFilename}'`);
   const infos = getCourseNotes(fullFilename);
-  console.log("infos vom Kurs=", infos);
   res.json(infos);
 });
 
