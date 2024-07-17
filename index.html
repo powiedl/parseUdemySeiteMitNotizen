@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parse Udemy Notizen</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <input
+      name="file"
+      type="file"
+      placeholder="Name der HTML-Datei mit den Kursnotizen"
+      value="C:\\Users\\Roland\\Documents\\udemy-Kurse\\HTML-CSS-Bootcamp-Notizen.html"
+    />
+    <button>Process HTML file</button>
+    <textarea rows="20" cols="80" id="udemyHtml"> </textarea>
+
+    <div id="output-container">
+      <div id="course-info">
+        <h1 id="course-title"></h1>
+        <h2 id="course-link"></h2>
+        <h3 id="notes-summary"></h3>
+      </div>
+      <div id="notes-container"></div>
+    </div>
+    <span id="error"></span>
+    <script src="browser-parseUdemySeiteMitNotizen.js"></script>
+  </body>
+</html>

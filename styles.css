@@ -1,0 +1,43 @@
+html {
+    font-family: sans-serif;
+}
+
+.notes-container {
+    border-top: 4px solid black;
+}
+
+.single-note-card {
+    border: 2px black solid;
+    border-radius: 1rem;
+    margin: 1rem 0.5rem;
+    padding: 0.5rem;
+    display: grid;
+    grid-template-areas: "section lesson timestamp" "note note note";
+    grid-template-rows: 2rem auto;
+    gap: 0.5rem;
+}
+
+.single-note-card h4 {
+    grid-area: section;
+    text-align: left;
+}
+
+.single-note-card h5 {
+    grid-area: lesson;
+    text-align: center;
+}
+
+.single-note-card span {
+    grid-area: timestamp;
+    text-align: right;
+}
+
+.single-note-card div {
+    grid-area: note;
+}
+
+.single-note-card .ud-component--base-components--code-block {
+    margin: 0.2rem 0.5rem;
+    background-color: beige;
+    border: 1px solid darkslategrey;
+}
