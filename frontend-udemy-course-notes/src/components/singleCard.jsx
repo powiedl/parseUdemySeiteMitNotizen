@@ -49,10 +49,9 @@ export default function SingleCard({ children }) {
   const [edit, setEdit] = useState(false);
 
   function handleEditClick() {
-    console.log("handleClick edit=", edit);
+    //console.log("handleClick edit=", edit);
     setEdit((e) => !e);
   }
-  console.log("SingleCard edit=", edit);
   return (
     <StyledSingleCard>
       <SingleCardContext.Provider value={{ edit }}>
@@ -77,7 +76,7 @@ function TimeStamp({ children }) {
 
 function Note({ children }) {
   const { edit } = useContext(SingleCardContext);
-  console.log("Button edit=", edit);
+  //console.log("Button edit=", edit);
   return (
     <StyledNote>
       {edit && "EDITING!"} {children}

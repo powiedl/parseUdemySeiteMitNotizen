@@ -15,22 +15,7 @@ export default function App() {
     //console.log(`requesting ${url}'`);
     axios.get(url).then((response) => {
       setCourseInfo(response.data);
-      //console.log("Antwort vom Backend!");
-      //console.log(response.data);
-      //console.log("==================================================================");
     });
-    // axios
-    //   .post("http://localhost:3000/files", formData, {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data", // damit multer "anspringt"
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log("response", response.data);
-    //     const filenames = response.data.files.map((file) => file.filename);
-    //     setHtmlfiles(filenames);
-    //     console.log("htmlfiles=", htmlfiles);
-    //   });
   }
 
   return (

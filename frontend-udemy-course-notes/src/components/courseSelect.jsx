@@ -39,10 +39,8 @@ export default function CourseSelect({ onCourseSelected }) {
   const changeFiles = (e) => {
     setFiles(e.target.files);
   };
-  console.log("onCourseSelected=", onCourseSelected);
   const uploadFiles = (e) => {
     e.preventDefault();
-    console.log("uploadFiles", files);
     const formData = new FormData();
     for (const file of files) {
       formData.append("htmlfiles", file);
@@ -54,15 +52,12 @@ export default function CourseSelect({ onCourseSelected }) {
         },
       })
       .then((response) => {
-        console.log("response", response.data);
         const filenames = response.data.files.map((file) => file.filename);
         setHtmlfiles(filenames);
-        console.log("htmlfiles=", htmlfiles);
       });
   };
 
   function handleSelectCourse(htmlfile) {
-    console.log("Course selected:", htmlfile);
     onCourseSelected(htmlfile);
   }
   return (
@@ -92,20 +87,3 @@ export default function CourseSelect({ onCourseSelected }) {
     </StyledCourseSelection>
   );
 }
-
-//   return (
-//  7   <div>
-//       <p>
-//         Hier kann die Datei vom gewünschten Kurs ausgewählt und hochgeladen
-//         werden
-//       </p>
-//       <form onSubmit={handleSubmit}>
-//         <label htmlFor='fileSelector'>course HTML file</label>
-//         <input type='file' onChange={onFileChange} id='fileSelector' />
-//         <button type='submit' disabled={btnDisabled}>
-//           upload
-//         </button>
-//       </form>
-//     </div>
-//   );
-// }
