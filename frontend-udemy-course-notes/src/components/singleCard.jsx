@@ -12,13 +12,22 @@ const StyledSingleCard = styled.div`
 
 const StyledNote = styled.div`
   background-color: beige;
+  padding: 0.3rem 0.6rem;
 `;
 
-const StyledSection = styled.h4``;
+const StyledSection = styled.h4`
+  display: inline;
+  margin: 0.5rem 1.5rem;
+`;
 
-const StyledLession = styled.h5``;
+const StyledLession = styled.h5`
+  display: inline;
+  margin: 0.5rem 1.5rem;
+`;
 
-const StyledTimeStamp = styled.span``;
+const StyledTimeStamp = styled.span`
+  margin: 0.5rem 1.5rem;
+`;
 
 const StyledButton = styled.button`
   position: absolute;

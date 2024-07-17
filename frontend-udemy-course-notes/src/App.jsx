@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import parse from "html-react-parser";
 import axios from "axios";
+import "./App.css";
 import SingleCard from "./components/singleCard";
 import CourseSelect from "./components/courseSelect";
 import CourseOverview from "./components/courseOverview";

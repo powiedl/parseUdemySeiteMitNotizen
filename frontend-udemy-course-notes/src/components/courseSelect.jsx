@@ -1,7 +1,37 @@
 //import React from 'react'
-
 import { useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
+
+const StyledCourseSelection = styled.header`
+  border: 1px solid black;
+  border-radius: 0.2rem;
+  padding: 0.5rem 0.5rem;
+  & form {
+    padding: 1rem;
+    & label {
+      padding: 0.2rem 1rem;
+    }
+    & button {
+      padding: 0.2rem 0.5rem;
+      margin: 0.5rem 1.5rem;
+    }
+  }
+  & .light {
+    opacity: 0.8;
+    font-size: small;
+    padding: 0.5rem 1rem;
+  }
+
+  & li {
+    cursor: pointer;
+  }
+
+  & li:hover {
+    font-weight: bolder;
+    transition: all 0.2s;
+  }
+`;
 
 export default function CourseSelect({ onCourseSelected }) {
   const [files, setFiles] = useState([]);
@@ -36,7 +66,7 @@ export default function CourseSelect({ onCourseSelected }) {
     onCourseSelected(htmlfile);
   }
   return (
-    <div>
+    <StyledCourseSelection>
       <p>
         Hier kann die Datei vom gewünschten Kurs ausgewählt und hochgeladen
         werden
@@ -57,14 +87,14 @@ export default function CourseSelect({ onCourseSelected }) {
           })}
         </ul>
       ) : (
-        <p>noch kein File hochgeladen ...</p>
+        <p className='light'>noch kein File hochgeladen ...</p>
       )}
-    </div>
+    </StyledCourseSelection>
   );
 }
 
 //   return (
-//     <div>
+//  7   <div>
 //       <p>
 //         Hier kann die Datei vom gewünschten Kurs ausgewählt und hochgeladen
 //         werden
