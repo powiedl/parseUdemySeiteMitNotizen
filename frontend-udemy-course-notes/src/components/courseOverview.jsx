@@ -1,5 +1,12 @@
 //import React from "react";
+import styled from "styled-components";
 
-export default function courseOverview() {
-  return <div></div>;
+const StyledCourseOverview = styled.div``;
+
+export default function courseOverview({ courseInfo }) {
+  return (
+    <StyledCourseOverview>
+      <h2>{courseInfo.title}</h2>
+    </StyledCourseOverview>
+  );
 }
