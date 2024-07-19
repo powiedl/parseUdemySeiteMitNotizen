@@ -69,11 +69,11 @@ const StyledButton = styled.button`
 `;
 
 const SingleCardContext = createContext();
-export default function SingleCard({ children }) {
+export default function SingleCard({ children, note }) {
   const [edit, setEdit] = useState(false);
   const [convertedText, setConvertedText] = useState("");
   const [savedText, setSavedText] = useState("");
-
+  const changed = note.noteHTML !== convertedText;
   function handleEditClick() {
     //console.log("handleClick edit=", edit);
     setEdit((e) => !e);
@@ -81,7 +81,7 @@ export default function SingleCard({ children }) {
   return (
     <StyledSingleCard>
       <SingleCardContext.Provider
-        value={{ edit, convertedText, setConvertedText }}
+        value={{ edit, convertedText, setConvertedText, changed, note }}
       >
         {children}
         <EditButton onClick={handleEditClick}>🖊</EditButton>
@@ -103,25 +103,29 @@ function TimeStamp({ children }) {
 }
 
 function Note({ children }) {
-  const { edit, convertedText, setConvertedText } =
+  const { edit, convertedText, setConvertedText, changed, note } =
     useContext(SingleCardContext);
   //const [editContent, setEditContent] = useState();
   useEffect(() => {
-    const str = ReactDOMServer.renderToString(<>{children}</>);
-    setConvertedText(str);
-  }, [setConvertedText, children]);
+    //const str = ReactDOMServer.renderToString({ children });
+    setConvertedText(note.noteHTML);
+  }, [setConvertedText, note]);
+  //console.log("convertedText=", convertedText);
   return (
     <StyledNote>
+      {changed && "CHANGED! "}
       {edit ? (
-        <ReactQuill
-          theme='snow'
-          value={convertedText}
-          onChange={setConvertedText}
-          style={{ minHeight: "300px" }}
-          modules={editorModules}
-        />
+        <>
+          <ReactQuill
+            theme='snow'
+            value={convertedText}
+            onChange={setConvertedText}
+            // style={{ minHeight: "300px" }}
+            modules={editorModules}
+          />
+        </>
       ) : (
-        parse(convertedText)
+        <>{parse(convertedText)}</>
       )}
     </StyledNote>
   );

@@ -23,14 +23,16 @@ export default function App() {
       {course && <CourseOverview />}
       {courseInfo?.title && <CourseOverview courseInfo={courseInfo} />}
       {courseInfo?.notes?.length > 0 &&
-        courseInfo.notes.map((note) => (
-          <SingleCard key={note.key}>
-            <SingleCard.Section>{note.sectionHeading}</SingleCard.Section>
-            <SingleCard.Lesson>{note.lessonHeading}</SingleCard.Lesson>
-            <SingleCard.TimeStamp>{note.timestampStr}</SingleCard.TimeStamp>
-            <SingleCard.Note>{note.noteHTML}</SingleCard.Note>
-          </SingleCard>
-        ))}
+        courseInfo.notes.map((note) => {
+          return (
+            <SingleCard key={note.key} note={note}>
+              <SingleCard.Section>{note.sectionHeading}</SingleCard.Section>
+              <SingleCard.Lesson>{note.lessonHeading}</SingleCard.Lesson>
+              <SingleCard.TimeStamp>{note.timestampStr}</SingleCard.TimeStamp>
+              <SingleCard.Note>{note.noteHTML}</SingleCard.Note>
+            </SingleCard>
+          );
+        })}
     </>
   );
 }
