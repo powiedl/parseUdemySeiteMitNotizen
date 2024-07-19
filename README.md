@@ -21,17 +21,8 @@ In the future I also plan to have the possibility to edit the notes in this Reac
 ## The backend 
 It is "ready" for now. 
 
-In the future maybe I add some (or all) of the following features:
-* Storing the information parsed out of the HTML file in some kind of database (neccessary for all other features).
-* Storing the original and the edited version of a note (if it will be possible to edit the notes in the React app), this would be needed to keep the edited version of the notes if you reupload a course HTML.
-* Tagging notes (from the backend perspective this means storing the tags to the note and/or the course - depending which elements it will be possible to tag)
-
 ## The frontend
-Started to experiment with a possibility to edit the notes (Quill and react-quill). This broke the nicely rendering of the notes as HTML Elements. Now I'm trying to get the nice rendering back - without loosing the possibility to edit the notes.
-
-In the future maybe I add some (or all) of the following features:
-* Tagging notes and/or courses (at the moment I think this would be more useful for the notes).
-* Possibility to filter notes based on the tags.
+Started to experiment with a possibility to edit the notes (Quill and react-quill). This broke the nicely rendering of the notes as HTML elements. Now I'm trying to get the nice rendering back - without loosing the possibility to edit the notes. Succeeded - nice rendering of notes as HTML elements is back and it is also possible to edit the notes. But as I start editing a note it will be displayed as "changed" (although at this moment I haven't changed anything).
 
 # Project contents
 
@@ -68,3 +59,17 @@ This component can display some information about the course (title and URL).
 
 This component is responsible for rendering a single note. It consists of some child components (which only make sense in conjunction with the SingleCard component).
 
+# Next steps
+* display if a note was changed correctly (bugfix)
+* save a changed note at the backend (with this step I will probably add a database to store the information parsed out of the HTML files)
+ 
+# Possible future improvements
+## Backend
+* Storing the information parsed out of the HTML file in some kind of database (neccessary for all other features).
+* Storing the original and the edited version of a note (if it will be possible to edit the notes in the React app), this would be needed to keep the edited version of the notes if you reupload a course HTML.
+* Tagging notes (from the backend perspective this means storing the tags to the note and/or the course - depending which elements it will be possible to tag)
+## Frontend
+* Tagging notes and/or courses (at the moment I think this would be more useful for the notes).
+* Possibility to filter notes based on the tags.
+
+##
