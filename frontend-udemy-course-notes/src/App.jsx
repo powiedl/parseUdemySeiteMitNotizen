@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import parse from "html-react-parser";
 import axios from "axios";
 import "./App.css";
 import SingleCard from "./components/singleCard";
@@ -29,7 +28,7 @@ export default function App() {
             <SingleCard.Section>{note.sectionHeading}</SingleCard.Section>
             <SingleCard.Lesson>{note.lessonHeading}</SingleCard.Lesson>
             <SingleCard.TimeStamp>{note.timestampStr}</SingleCard.TimeStamp>
-            <SingleCard.Note>{parse(note.noteHTML)}</SingleCard.Note>
+            <SingleCard.Note>{note.noteHTML}</SingleCard.Note>
           </SingleCard>
         ))}
     </>

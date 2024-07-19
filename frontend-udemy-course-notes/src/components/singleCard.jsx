@@ -1,6 +1,30 @@
 //import React from 'react'
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
+import parse from "html-react-parser";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
+import ReactDOMServer from "react-dom/server";
+
+const editorModules = {
+  toolbar: {
+    container: [
+      [{ header: [1, 2, 3, 4, false] }],
+      ["bold", "italic", "underline", "blockquote"],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["code-block"],
+    ],
+    handlers: {},
+  },
+  clipboard: {
+    matchVisual: true,
+  },
+};
 
 const StyledSingleCard = styled.div`
   border: 2px solid black;
@@ -47,6 +71,8 @@ const StyledButton = styled.button`
 const SingleCardContext = createContext();
 export default function SingleCard({ children }) {
   const [edit, setEdit] = useState(false);
+  const [convertedText, setConvertedText] = useState("");
+  const [savedText, setSavedText] = useState("");
 
   function handleEditClick() {
     //console.log("handleClick edit=", edit);
@@ -54,7 +80,9 @@ export default function SingleCard({ children }) {
   }
   return (
     <StyledSingleCard>
-      <SingleCardContext.Provider value={{ edit }}>
+      <SingleCardContext.Provider
+        value={{ edit, convertedText, setConvertedText }}
+      >
         {children}
         <EditButton onClick={handleEditClick}>🖊</EditButton>
       </SingleCardContext.Provider>
@@ -75,11 +103,26 @@ function TimeStamp({ children }) {
 }
 
 function Note({ children }) {
-  const { edit } = useContext(SingleCardContext);
-  //console.log("Button edit=", edit);
+  const { edit, convertedText, setConvertedText } =
+    useContext(SingleCardContext);
+  //const [editContent, setEditContent] = useState();
+  useEffect(() => {
+    const str = ReactDOMServer.renderToString(<>{children}</>);
+    setConvertedText(str);
+  }, [setConvertedText, children]);
   return (
     <StyledNote>
-      {edit && "EDITING!"} {children}
+      {edit ? (
+        <ReactQuill
+          theme='snow'
+          value={convertedText}
+          onChange={setConvertedText}
+          style={{ minHeight: "300px" }}
+          modules={editorModules}
+        />
+      ) : (
+        parse(convertedText)
+      )}
     </StyledNote>
   );
 }
