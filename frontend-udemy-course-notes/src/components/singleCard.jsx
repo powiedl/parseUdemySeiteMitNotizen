@@ -1,11 +1,12 @@
 //import React from 'react'
 import { createContext, useState, useContext, useEffect } from "react";
 import parse from "html-react-parser";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
 import ReactDOMServer from "react-dom/server";
 
+// #region Quill manipulationen
 const editorModules = {
   toolbar: {
     container: [
@@ -25,6 +26,7 @@ const editorModules = {
     matchVisual: true,
   },
 };
+// #endregion
 
 const StyledSingleCard = styled.div`
   border: 2px solid black;
@@ -71,17 +73,37 @@ const StyledButton = styled.button`
 const SingleCardContext = createContext();
 export default function SingleCard({ children, note }) {
   const [edit, setEdit] = useState(false);
-  const [convertedText, setConvertedText] = useState("");
+  const [convertedText, setConvertedText] = useState(note.noteHTML);
   const [savedText, setSavedText] = useState("");
   const changed = note.noteHTML !== convertedText;
   function handleEditClick() {
     //console.log("handleClick edit=", edit);
     setEdit((e) => !e);
+    setConvertedText((t) => correctConvertedText(t));
+  }
+  function correctConvertedText(t) {
+    // remove multiple <p><br></p> in a row
+    const pattern = "<p><br></p>";
+    const newText = t
+      .split(pattern)
+      .filter((e) => e)
+      .join(pattern);
+    // split string at each occurence of pattern, ...
+    // ... if multiple patterns occur in sccession then the splitted element is an empty string
+    // ... so filter out empty elements - an empty string is falsy, so filter filters it out
+    // ... join the elements of the resulting array with the pattern - so the pattern is guaranteed to be only one at a time
+    return newText;
   }
   return (
     <StyledSingleCard>
       <SingleCardContext.Provider
-        value={{ edit, convertedText, setConvertedText, changed, note }}
+        value={{
+          edit,
+          convertedText,
+          setConvertedText,
+          changed,
+          note,
+        }}
       >
         {children}
         <EditButton onClick={handleEditClick}>🖊</EditButton>
@@ -106,10 +128,10 @@ function Note({ children }) {
   const { edit, convertedText, setConvertedText, changed, note } =
     useContext(SingleCardContext);
   //const [editContent, setEditContent] = useState();
-  useEffect(() => {
-    //const str = ReactDOMServer.renderToString({ children });
-    setConvertedText(note.noteHTML);
-  }, [setConvertedText, note]);
+  // useEffect(() => {
+  //   //const str = ReactDOMServer.renderToString({ children });
+  //   setConvertedText(note.noteHTML);
+  // }, [setConvertedText, note]);
   //console.log("convertedText=", convertedText);
   return (
     <StyledNote>
