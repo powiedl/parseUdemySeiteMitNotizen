@@ -72,4 +72,6 @@ This component is responsible for rendering a single note. It consists of some c
 * Tagging notes and/or courses (at the moment I think this would be more useful for the notes).
 * Possibility to filter notes based on the tags.
 
-##
+# Known bugs
+1. Udemy organizes code blocks internal as ordered list (I guess to get the linenumbers). This ordered list get's lost (and so do the line numbers) if I edit the note with Quill. At the moment I have no idea how I could prevent this from happen (and so I guess I will live with this manipulation for the moment).
+
