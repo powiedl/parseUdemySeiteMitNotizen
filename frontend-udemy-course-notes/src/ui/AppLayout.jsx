@@ -28,12 +28,20 @@ export default function AppLayout() {
   return (
     <StyledAppLayout>
       <Header />
-      <Sidebar />
-      <Main>
-        <Container>
-          <Outlet />
-        </Container>
-      </Main>
+      <div>AppLayout</div>
     </StyledAppLayout>
   );
 }
+// export default function AppLayout() {
+//   return (
+//     <StyledAppLayout>
+//       <Header />
+//       <Sidebar />
+//       <Main>
+//         <Container>
+//           <Outlet />
+//         </Container>
+//       </Main>
+//     </StyledAppLayout>
+//   );
+// }
