@@ -10,14 +10,14 @@ const StyledCourseSelect = styled.div`
 `;
 
 export default function CourseSelect() {
-  const [htmlFile, setHtmlFile] = useState("");
+  const [htmlFile, setHtmlFile] = useState();
   function handleClick(e) {
     e.preventDefault();
     const fileInput = document.getElementById("course-select-input");
     fileInput.click();
   }
   function onInput(e) {
-    setHtmlFile(e.target.value);
+    setHtmlFile(e.target.files[0]);
   }
 
   return (
@@ -35,10 +35,11 @@ export default function CourseSelect() {
           type='file'
           accept='.htm,.html,text/html'
           className='course-file-upload-input'
-          value={htmlFile}
           onInput={onInput}
+          multiple={false}
         />
       </form>
+      {htmlFile && <span>{htmlFile.name}</span>}
     </StyledCourseSelect>
   );
 }
