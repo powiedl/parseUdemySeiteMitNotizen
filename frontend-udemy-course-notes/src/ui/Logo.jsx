@@ -16,7 +16,7 @@ function Logo() {
   const src = "u-notes-logo.png";
   return (
     <StyledLogo>
-      <Img src={src} alt='Logo' />
+      <Img src={src} alt='u-notes Logo' />
     </StyledLogo>
   );
 }
