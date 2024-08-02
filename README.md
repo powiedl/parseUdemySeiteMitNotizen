@@ -60,7 +60,7 @@ This component can display some information about the course (title and URL).
 This component is responsible for rendering a single note. It consists of some child components (which only make sense in conjunction with the SingleCard component).
 
 # Next steps
-* Before I continue with the steps mentioned in the following I will restructure the frontend (just like the-wild-oasis project from Jonas Schmedtmann's excellent "Ultimate React" course - if you are interested in learing React - and even Next.Js - I highly recommend this course to you)
+* Before I continue with the steps mentioned in the following I will restructure the frontend (just like the-wild-oasis project from Jonas Schmedtmann's excellent "Ultimate React" course - if you are interested in learing React - and even Next.Js - I highly recommend this course to you) - therefore I've created a branch frontend-redesign (in which I'm currently working)
 * display if a note was changed correctly (bugfix)
 * save a changed note at the backend (with this step I will probably add a database to store the information parsed out of the HTML files)
  
