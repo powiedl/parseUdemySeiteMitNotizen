@@ -2,6 +2,7 @@ import styled from "styled-components";
 import HeaderMenu from "./HeaderMenu";
 import UserAvatar from "../features/authentication/UserAvatar";
 import HeaderCourseTitle from "./HeaderCourseTitle";
+import { useCurrentCourse } from "../context/CurrentCourseContext";
 
 const StyledHeader = styled.header`
   background-color: var(--color-grey-0);
@@ -13,9 +14,12 @@ const StyledHeader = styled.header`
   justify-content: flex-end;
 `;
 export default function Header() {
+  const { courseInfo } = useCurrentCourse();
   return (
     <StyledHeader>
-      <HeaderCourseTitle>CourseTitle</HeaderCourseTitle>
+      <HeaderCourseTitle>
+        {courseInfo.title || "Select a course file"}
+      </HeaderCourseTitle>
       <UserAvatar />
       <HeaderMenu />
     </StyledHeader>

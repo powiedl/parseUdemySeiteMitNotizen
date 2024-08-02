@@ -60,7 +60,9 @@ function getCourseNotes(courseHtml) {
   //const { href } = titleEl;
   //const { nodeValue: title } = titleEl.childNodes[0]; // ich hätte das gerne in das Destructuring oben integriert, habe es aber nicht geschafft
   const { href, textContent: title } = titleEl; // in jsdom wird scheinbar aus innerText textContent
-
+  console.log("titleEl=", titleEl);
+  console.log("  href=", href);
+  console.log("  title=", title);
   // alle Notizen-Elemente (damit auch die ganzen Meta-Daten)
   const allNotesEl = body.querySelectorAll(
     `div${anyClassStartsWithSelector("lecture-bookmark-v2--row--")}`
@@ -70,7 +72,7 @@ function getCourseNotes(courseHtml) {
     allNotesData.push(parseSingleNote(singleNoteEl));
   }
 
-  const erg = { title, href, notes: allNotesData };
+  const erg = { id: courseHtml, title, href, notes: allNotesData };
   return erg;
 }
 

@@ -5,6 +5,7 @@ import axios from "axios";
 import "./App.css";
 import GlobalStyles from "./styles/GlobalStyles";
 import { DarkModeProvider } from "./context/DarkModeContext";
+import { CurrentCourseProvider } from "./context/CurrentCourseContext";
 
 import SingleCard from "./components/singleCard";
 //import CourseSelect from "./components/courseSelect";
@@ -19,6 +20,7 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "./ui/Sidebar";
 import Header from "./ui/Header";
 import styled from "styled-components";
+import CourseDetail from "./features/course/CourseDetail";
 
 const StyledAppLayout = styled.div`
   display: grid;
@@ -57,29 +59,32 @@ export default function App() {
     <DarkModeProvider>
       <StyleSheetManager shouldForwardProp={(prop) => prop !== "variation"}>
         <GlobalStyles />
-        <BrowserRouter>
-          <Routes>
-            <Route
-              element={
-                <StyledAppLayout>
-                  <Header />
-                  <Sidebar />
-                  <Main>
-                    <Container>
-                      <Outlet />
-                    </Container>
-                  </Main>
-                </StyledAppLayout>
-              }
-            >
-              <Route index element={<Navigate replace to='dashboard' />} />
-              <Route path='dashboard' element={<Dashboard />} />
-              <Route path='course/select' element={<CourseSelect />} />
-              <Route path='course/:courseId' element={<CourseOverview />} />
-            </Route>
-            <Route path='*' element={<PageNotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <CurrentCourseProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route
+                element={
+                  <StyledAppLayout>
+                    <Header />
+                    <Sidebar />
+                    <Main>
+                      <Container>
+                        <Outlet />
+                      </Container>
+                    </Main>
+                  </StyledAppLayout>
+                }
+              >
+                <Route index element={<Navigate replace to='dashboard' />} />
+                <Route path='dashboard' element={<Dashboard />} />
+                <Route path='course/select' element={<CourseSelect />} />
+                <Route path='course/:courseId' element={<CourseOverview />} />
+                <Route path='notes/:courseId' element={<CourseDetail />} />
+              </Route>
+              <Route path='*' element={<PageNotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </CurrentCourseProvider>
       </StyleSheetManager>
     </DarkModeProvider>
   );

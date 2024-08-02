@@ -31,7 +31,10 @@ app.post("/files", upload.array("htmlfiles"), (req, res) => {
 
 app.get("/infos/:htmlfile", (req, res) => {
   const fullFilename = process.cwd() + "/uploads" + "/" + req.params.htmlfile;
-  const infos = getCourseNotes(fullFilename);
+  const infos = {
+    ...getCourseNotes(fullFilename),
+    id: req.params.htmlfile.replace(/\.html?/, ""), // als id wird der Dateiname ohne Extension (.htm[l]) genommen - solange bis ich was besseres finde
+  };
   res.json(infos);
 });
 

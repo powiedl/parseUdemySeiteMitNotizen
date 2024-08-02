@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import { useDarkMode } from "../context/DarkModeContext";
+import logoUrl from "../assets/u-notes-logo-brand-700.png";
 
 const StyledLogo = styled.div`
   text-align: center;
+  font-family: "Edu AU VIC WA NT Hand", cursive;
+  font-size: 2rem;
+  color: var(--color-brand-700);
 `;
 
 const Img = styled.img`
@@ -13,10 +17,10 @@ const Img = styled.img`
 function Logo() {
   const { isDarkMode } = useDarkMode();
   //const src = isDarkMode ? "/logo-dark.png" : "/logo-light.png";
-  const src = "u-notes-logo.png";
   return (
     <StyledLogo>
-      <Img src={src} alt='u-notes Logo' />
+      <Img src={logoUrl} alt='u-notes Logo' />
+      <div>u-notes</div>
     </StyledLogo>
   );
 }

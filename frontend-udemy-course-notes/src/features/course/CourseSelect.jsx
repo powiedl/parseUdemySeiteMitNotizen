@@ -3,6 +3,8 @@ import Button from "../../ui/Button";
 import { useState } from "react";
 import axios from "axios";
 import { uploadCourseHTML, parseFile } from "../../services/apiFiles";
+import { useCurrentCourse } from "../../context/CurrentCourseContext";
+import { useNavigate } from "react-router-dom";
 const StyledCourseSelect = styled.div`
   .course-file-upload-input {
     display: none;
@@ -22,8 +24,11 @@ const StyledCourseSelect = styled.div`
   }
 `;
 
-export default function CourseSelect({ onSelect }) {
+export default function CourseSelect() {
   const [htmlFile, setHtmlFile] = useState();
+  const { setCourseTitle, setCourseHref, setCourseNotes } = useCurrentCourse();
+  const { navigate } = useNavigate();
+
   function handleClick(e) {
     //    console.log("CourseSelect,handleClick");
     e.preventDefault();
@@ -43,9 +48,6 @@ export default function CourseSelect({ onSelect }) {
       //console.log("CourseSelect,filenames=", filenames);
       setHtmlFile(filenames[0]);
     });
-
-    // hier könnte ich den Inhalt von handleSubmit aufnehmen - aber wenn ich das Submit über einen anderen Button steuern will?
-    // aber will ich das???
   }
 
   function handleSubmit(e) {
@@ -55,6 +57,15 @@ export default function CourseSelect({ onSelect }) {
     //console.log("CourseSelect,Submitting", htmlFile.name);
   }
 
+  async function handleSelect(e) {
+    console.log("CourseSelect,handleSelect,htmlFile=", htmlFile);
+    const { data, status } = await parseFile(htmlFile);
+    console.log("CourseSelect,data=", data);
+    setCourseTitle(data.title);
+    setCourseHref(data.href);
+    setCourseNotes(data.notes);
+    //navigate(`/notes/{data.id}`);
+  }
   return (
     <StyledCourseSelect>
       <form onSubmit={handleSubmit} id='course-select-form'>
@@ -63,7 +74,7 @@ export default function CourseSelect({ onSelect }) {
           size='large'
           onClick={handleClick}
         >
-          Choose course file
+          Add course file
         </Button>
         <input
           id='course-select-input'
@@ -74,7 +85,7 @@ export default function CourseSelect({ onSelect }) {
           multiple={false}
         />
       </form>
-      {htmlFile && <div onClick={() => parseFile(htmlFile)}>{htmlFile}</div>}
+      {htmlFile && <div onClick={handleSelect}>{htmlFile}</div>}
     </StyledCourseSelect>
   );
 }

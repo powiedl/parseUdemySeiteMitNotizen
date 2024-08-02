@@ -6,6 +6,7 @@ import {
   HiOutlineUsers,
   HiOutlineAcademicCap,
   HiOutlineDocumentText,
+  HiOutlineTag,
 } from "react-icons/hi2";
 const NavList = styled.ul`
   display: flex;
@@ -66,6 +67,10 @@ export default function MainNav() {
       <StyledNavLink to='/notes'>
         <HiOutlineDocumentText />
         <span>Notes</span>
+      </StyledNavLink>
+      <StyledNavLink to='/tags'>
+        <HiOutlineTag />
+        <span>Tags</span>
       </StyledNavLink>
       <StyledNavLink to='/users'>
         <HiOutlineUsers />
