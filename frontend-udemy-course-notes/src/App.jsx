@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Navigate, BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  Navigate,
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
 
 import axios from "axios";
 import "./App.css";
@@ -7,16 +13,15 @@ import GlobalStyles from "./styles/GlobalStyles";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import { CurrentCourseProvider } from "./context/CurrentCourseContext";
 
-import SingleCard from "./components/singleCard";
+//import SingleCard from "./components/singleCard";
 //import CourseSelect from "./components/courseSelect";
 import CourseSelect from "./features/course/CourseSelect";
 import CourseOverview from "./components/courseOverview";
 import { StyleSheetManager } from "styled-components";
-import AppLayout from "./ui/AppLayout";
+//import AppLayout from "./ui/AppLayout";
 import Dashboard from "./ui/Dashboard";
 import PageNotFound from "./pages/PageNotFound";
 
-import { Outlet } from "react-router-dom";
 import Sidebar from "./ui/Sidebar";
 import Header from "./ui/Header";
 import styled from "styled-components";
@@ -63,6 +68,7 @@ export default function App() {
           <BrowserRouter>
             <Routes>
               <Route
+                path='/'
                 element={
                   <StyledAppLayout>
                     <Header />

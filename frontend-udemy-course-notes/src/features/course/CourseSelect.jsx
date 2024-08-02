@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Button from "../../ui/Button";
 import { useState } from "react";
-import axios from "axios";
 import { uploadCourseHTML, parseFile } from "../../services/apiFiles";
 import { useCurrentCourse } from "../../context/CurrentCourseContext";
 import { useNavigate } from "react-router-dom";
@@ -26,8 +25,9 @@ const StyledCourseSelect = styled.div`
 
 export default function CourseSelect() {
   const [htmlFile, setHtmlFile] = useState();
-  const { setCourseTitle, setCourseHref, setCourseNotes } = useCurrentCourse();
-  const { navigate } = useNavigate();
+  const { setCourseTitle, setCourseHref, setCourseNotes, setCourseId } =
+    useCurrentCourse();
+  const navigate = useNavigate();
 
   function handleClick(e) {
     //    console.log("CourseSelect,handleClick");
@@ -64,7 +64,8 @@ export default function CourseSelect() {
     setCourseTitle(data.title);
     setCourseHref(data.href);
     setCourseNotes(data.notes);
-    //navigate(`/notes/{data.id}`);
+    setCourseId(data.id);
+    navigate(`/notes/${data.id}`);
   }
   return (
     <StyledCourseSelect>

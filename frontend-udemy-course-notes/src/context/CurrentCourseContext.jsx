@@ -15,6 +15,11 @@ function CurrentCourseProvider({ children }) {
       return { ...i, href: href };
     });
   }
+  function setCourseId(id) {
+    setCourseInfo((i) => {
+      return { ...i, id: id };
+    });
+  }
 
   return (
     <CurrentCourseContext.Provider
@@ -25,6 +30,7 @@ function CurrentCourseProvider({ children }) {
         setCourseNotes,
         setCourseTitle,
         setCourseHref,
+        setCourseId,
       }}
     >
       {children}
