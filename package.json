@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "@tanstack/react-query": "^5.51.16",
     "jsdom": "^24.1.0",
-    "react-quill": "^2.0.0"
+    "react-icons": "^5.2.1",
+    "react-quill": "^2.0.0",
+    "react-router-dom": "^6.25.1"
   }
 }
