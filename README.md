@@ -1,6 +1,6 @@
 # Disclaimer
 
-This is a work in progress project / repository. Right now it is not useful at all. I hope this will change at some point ...
+This is a work in progress project / repository. Right now it is not very useful. I hope this will change at some point ... (by now you can upload a course HTML, you can view the notes, you can edit them - but be aware that you can not save your changes anywhere with the app at the current stage of development!)
 
 # Goal
 
@@ -49,18 +49,18 @@ At the moment it contains three components (beside App).
 
 ### CourseSelect
 
-This component is responsible to select one (ore more) HTML Files with your notes (as described in the Procedure section).
+This component is responsible to select one HTML Files with your notes (as described in the Procedure section).
 
 ### CourseOverview
 
-This component can display some information about the course (title and URL).
+This component can display some information about the course (at the moment only the title, but the href is also inside the html - I just can't figure out how to extract it, because it would be a wonderful id of the course).
 
 ### SingleCard
 
 This component is responsible for rendering a single note. It consists of some child components (which only make sense in conjunction with the SingleCard component).
 
 # Next steps
-* Before I continue with the steps mentioned in the following I will restructure the frontend (just like the-wild-oasis project from Jonas Schmedtmann's excellent "Ultimate React" course - if you are interested in learing React - and even Next.Js - I highly recommend this course to you) - therefore I've created a branch frontend-redesign (in which I'm currently working)
+* Before I continue with the steps mentioned in the following I will restructure the frontend (just like the-wild-oasis project from Jonas Schmedtmann's excellent "Ultimate React" course - if you are interested in learing React - and even Next.Js - I highly recommend this course to you). The overall experience is nearly finished, but the course notes view is from the previous version (which wasn't very beautiful even in the parents eyes) and now it looks even worse, so I will have to do some design tweaking with the notes SingleCard component.
 * display if a note was changed correctly (bugfix)
 * save a changed note at the backend (with this step I will probably add a database to store the information parsed out of the HTML files)
  
