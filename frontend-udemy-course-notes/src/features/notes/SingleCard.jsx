@@ -1,9 +1,11 @@
 //import React from 'react'
 import { createContext, useState, useContext, useEffect } from "react";
 import parse from "html-react-parser";
+import { HiOutlinePencil } from "react-icons/hi2";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styled from "styled-components";
+import { useDarkMode } from "../../context/DarkModeContext";
 import ReactDOMServer from "react-dom/server";
 
 // #region Quill manipulationen
@@ -32,13 +34,17 @@ const StyledSingleCard = styled.div`
   border: 2px solid black;
   margin: 0.5rem;
   padding: 0.5rem;
-  border-radius: 0.3rem;
+  border-radius: 1rem;
   position: relative;
 `;
 
 const StyledNote = styled.div`
-  background-color: beige;
+  background-color: ${(props) =>
+    props.mode === "edit"
+      ? "var(--color-yellow-100)"
+      : "var(--color-green-100)"};
   padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
 `;
 
 const StyledSection = styled.h4`
@@ -57,28 +63,55 @@ const StyledTimeStamp = styled.span`
 
 const StyledButton = styled.button`
   position: absolute;
-  top: 0%;
-  right: 0%;
+  top: 0.3rem;
+  right: 0.3rem;
+  border-radius: 0.3rem;
+  padding: 0.3rem;
   transition: all 0.25s;
   opacity: 100%;
+  transform-origin: top right;
+  color: var(--color-grey-100);
   background-color: ${(props) =>
-    props.edit === "true" ? "blue" : "lightgray"};
+    props.mode === "edit"
+      ? "var(--color-yellow-700);"
+      : "var(--color-green-700);"}
   &:hover {
     transform: scale(1.2);
     transition: all 0.25s;
-    opacity: 80%;
+    opacity: 60%;
   }
+`;
+const StyledHeader = styled.header`
+  display: flex;
+  gap: 1rem;
+  margin: 0.2rem 0.5rem;
+  align-items: baseline;
+`;
+const StyledHeaderSection = styled.h4`
+  margin: 0.5rem 1.5rem;
+  font-weight: 900;
+`;
+
+const StyledHeaderLesson = styled.h4`
+  margin: 0.5rem 1.5rem;
+  font-weight: 700;
+`;
+const StyledHeaderTimestamp = styled.h4`
+  margin: 0.5rem 2.5rem 0.5rem auto;
+  font-weight: 400;
 `;
 
 const SingleCardContext = createContext();
 export default function SingleCard({ children, note }) {
-  const [edit, setEdit] = useState(false);
+  const { isDarkMode } = useDarkMode();
+
+  const [mode, setMode] = useState("show");
   const [convertedText, setConvertedText] = useState(note.noteHTML);
   const [savedText, setSavedText] = useState("");
   const changed = note.noteHTML !== convertedText;
   function handleEditClick() {
     //console.log("handleClick edit=", edit);
-    setEdit((e) => !e);
+    setMode((m) => (m === "show" ? "edit" : "show")); // toggle between 'show' and 'edit'
     setConvertedText((t) => correctConvertedText(t));
   }
   function correctConvertedText(t) {
@@ -98,7 +131,7 @@ export default function SingleCard({ children, note }) {
     <StyledSingleCard>
       <SingleCardContext.Provider
         value={{
-          edit,
+          mode,
           convertedText,
           setConvertedText,
           changed,
@@ -106,7 +139,9 @@ export default function SingleCard({ children, note }) {
         }}
       >
         {children}
-        <EditButton onClick={handleEditClick}>🖊</EditButton>
+        <EditButton onClick={handleEditClick}>
+          <HiOutlinePencil />
+        </EditButton>
       </SingleCardContext.Provider>
     </StyledSingleCard>
   );
@@ -124,8 +159,18 @@ function TimeStamp({ children }) {
   return <StyledTimeStamp>{children}</StyledTimeStamp>;
 }
 
+function Header({ section, lesson, timestamp }) {
+  return (
+    <StyledHeader>
+      <StyledHeaderSection>{section}</StyledHeaderSection>
+      <StyledHeaderLesson>{lesson}</StyledHeaderLesson>
+      <StyledHeaderTimestamp>{timestamp}</StyledHeaderTimestamp>
+    </StyledHeader>
+  );
+}
+
 function Note({ children }) {
-  const { edit, convertedText, setConvertedText, changed, note } =
+  const { mode, convertedText, setConvertedText, changed, note } =
     useContext(SingleCardContext);
   //const [editContent, setEditContent] = useState();
   // useEffect(() => {
@@ -134,9 +179,9 @@ function Note({ children }) {
   // }, [setConvertedText, note]);
   //console.log("convertedText=", convertedText);
   return (
-    <StyledNote>
+    <StyledNote mode={mode}>
       {changed && "CHANGED! "}
-      {edit ? (
+      {mode === "edit" ? (
         <>
           <ReactQuill
             theme='snow'
@@ -153,11 +198,11 @@ function Note({ children }) {
   );
 }
 
-function EditButton({ onClick }) {
-  const { edit } = useContext(SingleCardContext);
+function EditButton({ onClick, children, isDarkMode }) {
+  const { mode } = useContext(SingleCardContext);
   return (
-    <StyledButton onClick={onClick} edit={edit.toString()}>
-      🖊
+    <StyledButton onClick={onClick} mode={mode}>
+      {children}
     </StyledButton>
   );
 }
@@ -166,3 +211,4 @@ SingleCard.Section = Section;
 SingleCard.Lesson = Lesson;
 SingleCard.TimeStamp = TimeStamp;
 SingleCard.Note = Note;
+SingleCard.Header = Header;

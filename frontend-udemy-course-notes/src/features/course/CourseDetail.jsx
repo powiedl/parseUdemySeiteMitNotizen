@@ -16,9 +16,15 @@ export default function CourseDetail() {
     <>
       {courseNotes.map((note) => (
         <SingleCard key={note.key} note={note}>
-          <SingleCard.Section>{note.sectionHeading}</SingleCard.Section>
-          <SingleCard.Lesson>{note.lessonHeading}</SingleCard.Lesson>
-          <SingleCard.TimeStamp>{note.timestampStr}</SingleCard.TimeStamp>
+          {/* <SingleCard.Header>
+            {note.sectionHeading} - {note.lessonHeading}
+          </SingleCard.Header>
+          <SingleCard.Note /> */}
+          <SingleCard.Header
+            section={note.sectionHeading}
+            lesson={note.lessonHeading}
+            timestamp={note.timestampStr}
+          />
           <SingleCard.Note>{note.noteHTML}</SingleCard.Note>
         </SingleCard>
       ))}
