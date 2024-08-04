@@ -22,7 +22,7 @@ In the future I also plan to have the possibility to edit the notes in this Reac
 It is "ready" for now. 
 
 ## The frontend
-Started to experiment with a possibility to edit the notes (Quill and react-quill). This broke the nicely rendering of the notes as HTML elements. Now I'm trying to get the nice rendering back - without loosing the possibility to edit the notes. Succeeded - nice rendering of notes as HTML elements is back and it is also possible to edit the notes. But as I start editing a note it will be displayed as "changed" (although at this moment I haven't changed anything).
+Started to experiment with a possibility to edit the notes (Quill and react-quill). This broke the nicely rendering of the notes as HTML elements. Now I'm trying to get the nice rendering back - without loosing the possibility to edit the notes. Succeeded - nice rendering of notes as HTML elements is back and it is also possible to edit the notes. The "changed" is now triggered by an onChange event mit the source of user. Downside with this approach: If you add a character and then remove the same character again (so that the note looks the same at the beginning and after your "changes" it is still treated as "changed"). But for now I will go with this solution.
 
 # Project contents
 
@@ -60,8 +60,6 @@ This component can display some information about the course (at the moment only
 This component is responsible for rendering a single note. It consists of some child components (which only make sense in conjunction with the SingleCard component).
 
 # Next steps
-* Before I continue with the steps mentioned in the following I will restructure the frontend (just like the-wild-oasis project from Jonas Schmedtmann's excellent "Ultimate React" course - if you are interested in learing React - and even Next.Js - I highly recommend this course to you). The overall experience is nearly finished, but the course notes view is from the previous version (which wasn't very beautiful even in the parents eyes) and now it looks even worse, so I will have to do some design tweaking with the notes SingleCard component.
-* display if a note was changed correctly (bugfix)
 * save a changed note at the backend (with this step I will probably add a database to store the information parsed out of the HTML files)
  
 # Possible future improvements
