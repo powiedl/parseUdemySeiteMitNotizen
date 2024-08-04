@@ -1,5 +1,5 @@
 //import React from 'react'
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useContext, useRef, useEffect } from "react";
 import parse from "html-react-parser";
 import { HiOutlinePencil } from "react-icons/hi2";
 import ReactQuill, { Quill } from "react-quill";
@@ -30,6 +30,7 @@ const editorModules = {
 };
 // #endregion
 
+// #region Styling
 const StyledSingleCard = styled.div`
   border: 2px solid black;
   margin: 0.5rem;
@@ -100,6 +101,7 @@ const StyledHeaderTimestamp = styled.h4`
   margin: 0.5rem 2.5rem 0.5rem auto;
   font-weight: 400;
 `;
+// #endregion
 
 const SingleCardContext = createContext();
 export default function SingleCard({ children, note }) {
@@ -108,7 +110,8 @@ export default function SingleCard({ children, note }) {
   const [mode, setMode] = useState("show");
   const [convertedText, setConvertedText] = useState(note.noteHTML);
   const [savedText, setSavedText] = useState("");
-  const changed = note.noteHTML !== convertedText;
+  const [changed, setChanged] = useState(false);
+
   function handleEditClick() {
     //console.log("handleClick edit=", edit);
     setMode((m) => (m === "show" ? "edit" : "show")); // toggle between 'show' and 'edit'
@@ -134,6 +137,7 @@ export default function SingleCard({ children, note }) {
           mode,
           convertedText,
           setConvertedText,
+          setChanged,
           changed,
           note,
         }}
@@ -170,8 +174,13 @@ function Header({ section, lesson, timestamp }) {
 }
 
 function Note({ children }) {
-  const { mode, convertedText, setConvertedText, changed, note } =
+  const { mode, convertedText, setConvertedText, changed, setChanged, note } =
     useContext(SingleCardContext);
+  const qRef = useRef();
+  function handleChange(content, editor, source) {
+    if (source === "user") setChanged(true);
+    setConvertedText(content);
+  }
   //const [editContent, setEditContent] = useState();
   // useEffect(() => {
   //   //const str = ReactDOMServer.renderToString({ children });
@@ -180,15 +189,18 @@ function Note({ children }) {
   //console.log("convertedText=", convertedText);
   return (
     <StyledNote mode={mode}>
-      {changed && "CHANGED! "}
+      {changed && "CHANGED!"}
       {mode === "edit" ? (
         <>
           <ReactQuill
             theme='snow'
             value={convertedText}
-            onChange={setConvertedText}
+            onChange={(content, editor, source) =>
+              handleChange(content, editor, source)
+            }
             // style={{ minHeight: "300px" }}
             modules={editorModules}
+            ref={qRef}
           />
         </>
       ) : (
