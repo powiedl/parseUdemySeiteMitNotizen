@@ -40,12 +40,26 @@ const StyledSingleCard = styled.div`
 `;
 
 const StyledNote = styled.div`
-  background-color: ${(props) =>
-    props.mode === "edit"
-      ? "var(--color-yellow-100)"
-      : "var(--color-green-100)"};
   padding: 0.3rem 0.6rem;
   border-radius: 0.5rem;
+  & .ql-container {
+    /* background-color: ${(props) =>
+      props.mode === "edit"
+        ? "var(--color-yellow-100)"
+        : "var(--color-green-100)"}; */
+    background-color: var(--color-yellow-100);
+  }
+  /* & .ql-toolbar .ql-stroke,
+  & .ql-toolbar .ql-fill {
+    fill: var(--color-grey-700);
+    stroke: none;
+  } */
+  & .ql-toolbar .ql-picker {
+    color: var(--color-grey-700);
+  }
+  & code {
+    background-color: var(--color-grey-100) !important;
+  }
 `;
 
 const StyledSection = styled.h4`
