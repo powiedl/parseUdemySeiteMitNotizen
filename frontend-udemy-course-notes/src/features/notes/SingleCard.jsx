@@ -57,6 +57,9 @@ const StyledNote = styled.div`
   & .ql-toolbar .ql-picker {
     color: var(--color-grey-700);
   }
+  & .ql-toolbar .ql-stroke {
+    stroke: var(--color-grey-700);
+  }
   & code {
     background-color: var(--color-grey-100) !important;
   }
@@ -114,6 +117,12 @@ const StyledHeaderLesson = styled.h4`
 const StyledHeaderTimestamp = styled.h4`
   margin: 0.5rem 2.5rem 0.5rem auto;
   font-weight: 400;
+`;
+
+const StyledShowNote = styled.div`
+  & .ud-component--base-components--code-block {
+    margin-left: 3rem;
+  }
 `;
 // #endregion
 
@@ -218,7 +227,7 @@ function Note({ children }) {
           />
         </>
       ) : (
-        <>{parse(convertedText)}</>
+        <StyledShowNote>{parse(convertedText)}</StyledShowNote>
       )}
     </StyledNote>
   );
