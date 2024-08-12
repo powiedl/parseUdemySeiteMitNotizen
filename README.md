@@ -17,9 +17,17 @@ In the future I also plan to have the possibility to edit the notes in this Reac
 4. Open an editor
 5. Paste the content of the html tag here and save it
 
+# Alternatives
+
+I found two Google Chrome extensions which extract udemy notes in the browser (to be honest a friend of mine found them) - and they do a better job in extracting the note than I do at the moment ...
+
+So if you are interested in this functionality give them a try ...
+- https://chromewebstore.google.com/detail/udemy-notes-extractor/ldcplnodidjobnjalceieklecgoooebj 
+- https://chromewebstore.google.com/detail/udemy-notes-downloader/nfmebebffodanoadjadpjimpkihfeamn 
+
 # Current state
 ## The backend 
-It is "ready" for now. 
+It is "ready" for now. Maybe I should try to improve the parseSingleNote a "little" bit, because I think it "destroys" the note some times. And when you try to edit such a note with Quill it will be destroyed even more. 
 
 ## The frontend
 Started to experiment with a possibility to edit the notes (Quill and react-quill). This broke the nicely rendering of the notes as HTML elements. Now I'm trying to get the nice rendering back - without loosing the possibility to edit the notes. Succeeded - nice rendering of notes as HTML elements is back and it is also possible to edit the notes. The "changed" is now triggered by an onChange event mit the source of user. Downside with this approach: If you add a character and then remove the same character again (so that the note looks the same at the beginning and after your "changes" it is still treated as "changed"). But for now I will go with this solution.
