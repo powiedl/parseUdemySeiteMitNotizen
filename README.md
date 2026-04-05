@@ -31,6 +31,15 @@ In the future I also plan to have the possibility to edit the notes in this Reac
 4. Open an editor
 5. Paste the content of the html tag here and save it
 
+# Alternatives
+
+I found two Google Chrome extensions which extract udemy notes in the browser (to be honest a friend of mine found them) - and they do a better job in extracting the notes than I do at the moment ...
+
+So if you are interested in this functionality give them a try ...
+
+- https://chromewebstore.google.com/detail/udemy-notes-extractor/ldcplnodidjobnjalceieklecgoooebj
+- https://chromewebstore.google.com/detail/udemy-notes-downloader/nfmebebffodanoadjadpjimpkihfeamn
+
 ## Current state
 
 ### The backend
